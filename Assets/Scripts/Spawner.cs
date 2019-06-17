@@ -7,10 +7,10 @@ namespace Scripts
     public class Spawner : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _spawnObject;
+        private GameObject[] _spawnObject;
 
         [SerializeField]
-        private RandomRangeVector3 _spawnRange;
+        private RangeVector3 _spawnRange;
 
         [SerializeField]
         private float _spawnDelay;
@@ -23,7 +23,7 @@ namespace Scripts
             var spawned = Instantiate(gameObject, spawnPosition, Quaternion.identity);
             var spawnObject  = spawned.GetComponent<ISpawnObject>();
             if (spawnObject == null) return;
-            spawnObject.SetSpawned();
+            spawnObject.SetData();
             spawnObject.DestroyEvent += DestroySpawned;
             _spawnedList.Add(spawnObject);
         }
@@ -46,13 +46,24 @@ namespace Scripts
             
             StopCoroutine(_spawnCoroutine);
             _spawnCoroutine = null;
+            DestroySpawnedObjects();
+        }
+
+        private void DestroySpawnedObjects()
+        {
+            foreach (var spawnObject in _spawnedList)
+            {
+                spawnObject.Destroy();
+            }
+            
+            _spawnedList.Clear();
         }
 
         private IEnumerator StartSpawnCoroutine()
         {
             while (true)
             {
-                Spawn(_spawnObject, RandomRange.GetRandomRange(_spawnRange));
+                Spawn(_spawnObject[Random.Range(0, _spawnObject.Length)], RandomRange.GetRandomRange(_spawnRange));
                 yield return new WaitForSeconds(_spawnDelay);
             }
         }

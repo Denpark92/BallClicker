@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 namespace Scripts
 {
     [Serializable]
-    public class RandomRange<T>
+    public class Range<T>
     {
         public T MinValue;
         public T MaxValue;
@@ -13,17 +13,17 @@ namespace Scripts
 
     public static class RandomRange
     {
-        public static float GetRandomRange(RandomRangeFloat range)
+        public static float GetRandomRange(RangeFloat range)
         {
             return Random.Range(range.MinValue, range.MaxValue);
         }
         
-        public static int GetRandomRange(RandomRangeInt range)
+        public static int GetRandomRange(RangeInt range)
         {
             return Random.Range(range.MinValue, range.MaxValue + 1);
         }
 
-        public static Vector3 GetRandomRange(RandomRangeVector3 range)
+        public static Vector3 GetRandomRange(RangeVector3 range)
         {
             var x = Random.Range(range.MinValue.x, range.MaxValue.x);
             var y = Random.Range(range.MinValue.y, range.MaxValue.y);
@@ -33,17 +33,22 @@ namespace Scripts
     }
 
     [Serializable]
-    public class RandomRangeVector3 : RandomRange<Vector3>
+    public class RangeVector3 : Range<Vector3>
     {
     }
 
     [Serializable]
-    public class RandomRangeFloat : RandomRange<float>
+    public class RangeFloat : Range<float>
     {
     }
     
     [Serializable]
-    public class RandomRangeInt : RandomRange<int>
+    public class RangeInt : Range<int>
+    {
+    }
+    
+    [Serializable]
+    public class RangeColor : Range<Color>
     {
     }
 }

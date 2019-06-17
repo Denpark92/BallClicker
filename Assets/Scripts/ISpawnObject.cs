@@ -4,7 +4,8 @@ namespace Scripts
 {
     public interface ISpawnObject
     {
-        void SetSpawned();
+        void SetData();
         event Action<ISpawnObject> DestroyEvent;
+        void Destroy();
     }
 }

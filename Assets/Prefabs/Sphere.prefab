@@ -122,11 +122,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyRange:
-    MinValue: 60
-    MaxValue: 60
+    MinValue: 5
+    MaxValue: 10
   _massRange:
     MinValue: 1
     MaxValue: 40
-  _pointsRange:
-    MinValue: 5
+  _scoreRange:
+    MinValue: 1
     MaxValue: 10
+  _colorsRange:
+    MinValue: {r: 0, g: 1, b: 0.26057076, a: 1}
+    MaxValue: {r: 1, g: 0.10779156, b: 0, a: 1}
+  _renderer: {fileID: 4351742400093511220}
