@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace Scripts
 {
+    [RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(Spawner))]
     public class GameManager : MonoBehaviour
     {
         private GameManager()
@@ -12,9 +14,6 @@ namespace Scripts
         }
 
         public static GameManager Instance;
-
-        [SerializeField]
-        private Spawner _spawner;
         
         [SerializeField]
         private GameObject _playButton;
@@ -24,6 +23,9 @@ namespace Scripts
         
         [SerializeField]
         private TextMeshProUGUI _scoreText;
+        
+        private Spawner _spawner;
+        private AudioSource _audioSource;
 
         private int _score;
         public static Action<int> AddScore;
@@ -36,9 +38,20 @@ namespace Scripts
             Instance = this;
         }
 
+        private void OnEnable()
+        {
+            _spawner = GetComponent<Spawner>();
+            _audioSource = GetComponent<AudioSource>();
+        }
+
         private void OnDestroy()
         {
             Instance = null;
+        }
+        
+        public void PlaySound(AudioClip clip)
+        {
+            _audioSource.PlayOneShot(clip);
         }
 
         [UsedImplicitly]

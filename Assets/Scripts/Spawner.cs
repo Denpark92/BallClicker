@@ -21,7 +21,7 @@ namespace Scripts
         private void Spawn(GameObject gameObject, Vector3 spawnPosition)
         {
             var spawned = Instantiate(gameObject, spawnPosition, Quaternion.identity);
-            var spawnObject  = spawned.GetComponent<ISpawnObject>();
+            var spawnObject = spawned.GetComponent<ISpawnObject>();
             if (spawnObject == null) return;
             spawnObject.SetData();
             spawnObject.DestroyEvent += DestroySpawned;

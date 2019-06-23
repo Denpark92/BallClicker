@@ -21,6 +21,11 @@ namespace Scripts
         [SerializeField]
         private Renderer _renderer;
 
+        [SerializeField]
+        private AudioClip _destroyAudio;
+
+        public AudioClip DestroySound => _destroyAudio;
+
         public event Action<ISpawnObject> DestroyEvent;
 
         private float _destroyTime;
@@ -46,6 +51,7 @@ namespace Scripts
         private void OnMouseDown()
         {
             GameManager.AddScore(GetScore(1 - _lifeTime / _destroyTime));
+            GameManager.Instance.PlaySound(DestroySound);
             Destroy();
         }
 
@@ -58,6 +64,7 @@ namespace Scripts
         {
             yield return new WaitForSeconds(_destroyTime);
             GameManager.AddScore(GetScore(1) * -1);
+            GameManager.Instance.PlaySound(DestroySound);
             DestroyEvent?.Invoke(this);
             Destroy();
         }

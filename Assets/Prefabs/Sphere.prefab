@@ -134,3 +134,4 @@ MonoBehaviour:
     MinValue: {r: 0, g: 1, b: 0.26057076, a: 1}
     MaxValue: {r: 1, g: 0.10779156, b: 0, a: 1}
   _renderer: {fileID: 4351742400093511220}
+  _destroyAudio: {fileID: 8300000, guid: 9032578dff71748448eac293d96f7516, type: 3}
