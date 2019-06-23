@@ -52,6 +52,7 @@ namespace Scripts
         {
             GameManager.AddScore(GetScore(1 - _lifeTime / _destroyTime));
             GameManager.Instance.PlaySound(DestroySound);
+            DestroyEvent?.Invoke(this);
             Destroy();
         }
 
